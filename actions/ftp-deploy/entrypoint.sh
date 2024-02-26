@@ -14,7 +14,7 @@ remote_dir="$6"
 echo "Using port-$ftp_server_port to connect."
 echo "Uploading files..."
 
-lftp -d -u $ftp_server_username,$ftp_server_password -p $ftp_server_port $ftp_server_name -e "set ftp:ssl-force true;mirror -R -P 10 -e $input_dir $remote_dir; quit"
+lftp -d -u $ftp_server_username,$ftp_server_password -p $ftp_server_port $ftp_server_name -e "set ftp:ssl-force true;set ssl:verify-certificate no;mirror -R -P 10 -e $input_dir $remote_dir; quit"
 
 echo "Files are copied successfully."
 exit 0
