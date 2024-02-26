@@ -1,0 +1,39 @@
+name: Deploy to FTP Server
+author: S Saha
+description: Github Action to copy a folder to a remote server using FTP
+
+branding:
+  icon: "box"
+  color: "orange"
+
+inputs:
+  ftp_server_name:
+    description: "Name or IP address of the FTP server"
+    required: true
+  ftp_server_username:
+    description: "Username for FTP server"
+    required: true
+  ftp_server_password:
+    description: "Password for FTP server"
+    required: true
+  ftp_server_port:
+    description: "Port number of the FTP server (default: 21)"
+    required: false
+    default: 21
+  input_dir:
+    description: "Path to the local input directory"
+    required: true
+  remote_dir:
+    description: "Path to the target directory on the FTP server"
+    required: true
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.ftp_server_name }}
+    - ${{ inputs.ftp_server_username }}
+    - ${{ inputs.ftp_server_password }}
+    - ${{ inputs.ftp_server_port }}
+    - ${{ inputs.input_dir }}
+    - ${{ inputs.remote_dir }}

@@ -1,0 +1,19 @@
+# Node artifact files
+node_modules/
+.pnpm
+.turborepo
+.turbo
+build
+coverage
+
+# Astro artifact files
+.astro/
+/.angular
+dist/
+
+# Editor
+.vscode/
+
+# Miscellaneous
+public/
+pnpm-lock.yaml
