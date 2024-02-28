@@ -11,7 +11,7 @@
   "packageManager": "pnpm@8.15.4",
   "engines": {
     "node": ">=20.10.0",
-    "pnpm": ">=8.15.3"
+    "pnpm": ">=8.15.4"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
