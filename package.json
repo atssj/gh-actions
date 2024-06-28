@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A collection of Github actions.",
   "scripts": {
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "format": "pnpm exec prettier . --write"
   },
   "keywords": ["Github actions"],
   "author": "S Saha",
