@@ -10,7 +10,7 @@ importers:
     devDependencies:
       prettier:
         specifier: ^3.2.5
-        version: 3.3.2
+        version: 3.5.2
       turbo:
         specifier: ^2.0.0
         version: 2.0.6
@@ -19,8 +19,8 @@ importers:
 
 packages:
 
-  prettier@3.3.2:
-    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
+  prettier@3.5.2:
+    resolution: {integrity: sha512-lc6npv5PH7hVqozBR7lkBNOGXV9vMwROAPlumdBkX0wTbbzPu/U1hk5yL8p2pt4Xoc+2mkT8t/sow2YrV/M5qg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -60,7 +60,7 @@ packages:
 
 snapshots:
 
-  prettier@3.3.2: {}
+  prettier@3.5.2: {}
 
   turbo-darwin-64@2.0.6:
     optional: true
