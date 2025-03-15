@@ -1,6 +1,6 @@
 {
   "name": "@gh-actions/ftp-deploy",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Github action to deploy code to FTP server.",
   "scripts": {
     "format": "bunx prettier . --write"
