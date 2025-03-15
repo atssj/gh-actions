@@ -3,18 +3,16 @@
   "version": "1.0.0",
   "description": "Github action to deploy code to FTP server.",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "format": "pnpm exec prettier . --write"
+    "format": "bunx prettier . --write"
   },
   "keywords": [
     "Github actions",
     "FTP deploy"
   ],
   "author": "S Saha",
-  "license": "UNLICENSED",
-  "packageManager": "pnpm@10.6.3",
+  "license": "MIT",
+  "packageManager": "bun@1.2.4",
   "engines": {
-    "node": ">=20.10.0",
-    "pnpm": ">=8.15.4"
+    "node": ">=20.10.0"
   }
 }
