@@ -21,7 +21,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_REGISTRY_SECRET }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -29,5 +29,5 @@ jobs:
           context: ./actions/ftp-deploy
           push: true
           tags: |
-            ghcr.io/atssj/gh-actions:latest
-            ghcr.io/atssj/gh-actions:${{ github.sha }}
+            ghcr.io/atssj/ftp-deploy:latest
+            ghcr.io/atssj/ftp-deploy:${{ github.sha }}
