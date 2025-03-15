@@ -29,5 +29,5 @@ jobs:
           context: ./actions/ftp-deploy
           push: true
           tags: |
-            ghcr.io/atssj/ftp-deploy:latest
-            ghcr.io/atssj/ftp-deploy:${{ github.sha }}
+            ghcr.io/atssj/gh-actions:latest
+            ghcr.io/atssj/gh-actions:${{ github.sha }}
