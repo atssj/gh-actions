@@ -5,7 +5,30 @@ on:
     types: [published]
 
 jobs:
+  check-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      should_build: ${{ steps.check.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Check for relevant changes
+        id: check
+        run: |
+          # Check if the tag is for ftp-deploy
+          if [[ "${{ github.ref_name }}" =~ ^ftp-deploy-v ]]; then
+            # Check if relevant files changed since last release
+            git diff --name-only $(git describe --tags --abbrev=0 HEAD^)..HEAD | grep -q "^actions/ftp-deploy/\(src/.*\|Dockerfile\|action\.yml\)$"
+            echo "changed=$?" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
   docker:
+    needs: check-changes
+    if: needs.check-changes.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
