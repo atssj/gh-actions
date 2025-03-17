@@ -1,26 +1,46 @@
 # gh-actions Codebase Documentation
 
 ## Project Overview
-This repository contains a collection of reusable GitHub Actions, with robust development practices and automation tooling. The project uses Bun as its package manager and follows a monorepo structure for managing multiple actions.
+Repository for reusable GitHub Actions with automated release management.
 
 ## Technology Stack
 - **Runtime**: Node.js ≥20.10.0
 - **Package Manager**: Bun ≥1.2.4
-- **Development Tools**:
-  - Prettier for code formatting
-  - Husky for git hooks
-  - Commitlint for commit message validation
-  - Changesets for versioning
+- **Version Control**: Git with conventional commits
+- **CI/CD**: GitHub Actions
+- **Container Registry**: GitHub Container Registry
+
+## Release Management
+The project uses three main components for releases:
+
+1. **Changesets**
+   - Track changes
+   - Manage versions
+   - Generate changelogs
+
+2. **Release Script**
+   ```bash
+   scripts/release.sh
+   ```
+   - Automates version updates
+   - Creates and pushes tags
+   - Triggers release workflows
+
+3. **GitHub Actions**
+   - `release.yml`: Creates releases
+   - `docker-publish.yml`: Publishes containers
+   - `test.yml`: Validates changes
 
 ## Project Structure
 ```
 gh-actions/
-├── actions/                 # GitHub Actions
-│   ├── action-template/    # Template for new actions
+├── actions/                # GitHub Actions
 │   └── ftp-deploy/        # FTP deployment action
-├── scripts/                # Utility scripts
-├── .changeset/            # Changeset files
-└── .github/               # GitHub workflows and templates
+├── .github/
+│   └── workflows/         # CI/CD workflows
+├── scripts/
+│   └── release.sh         # Release automation
+└── .changeset/            # Change tracking
 ```
 
 ## Core Components
@@ -99,12 +119,20 @@ gh-actions/
 
 ## Development Guidelines
 
-### Adding New Actions
-1. Use action-template as base
-2. Follow naming conventions
-3. Include comprehensive documentation
-4. Add workflow tests
-5. Update changeset
+### 1. Version Control
+- Use conventional commits
+- Create changesets for changes
+- Follow commit message rules
+
+### 2. Release Process
+- Use `bun run release`
+- Never manually create tags/releases
+- Let workflows handle publishing
+
+### 3. Documentation
+- Keep changelogs updated
+- Document new features
+- Update READMEs for changes
 
 ### Testing
 - Local testing with act
@@ -117,6 +145,18 @@ gh-actions/
 - Usage examples
 - Implementation details
 - Troubleshooting guides
+
+## Workflow Details
+
+### 1. Release Workflow
+- Triggers on tag push
+- Generates changelogs
+- Creates GitHub releases
+
+### 2. Docker Publishing
+- Builds from Dockerfile
+- Uses semantic versioning
+- Publishes to GHCR
 
 ## Maintenance
 
@@ -131,6 +171,16 @@ gh-actions/
 - Pull request requirements
 - Conventional commits
 - Automated versioning
+
+### Automated Updates
+- Dependabot for dependencies
+- Renovate for Docker images
+- Weekly update schedule
+
+### Quality Control
+- Automated tests
+- Format checking
+- Conventional commits
 
 ## Future Considerations
 1. Expanding action collection
