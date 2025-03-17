@@ -7,29 +7,55 @@ on:
       - '*/v*'
 
 jobs:
+  validate-tag:
+    runs-on: ubuntu-latest
+    outputs:
+      is_valid: ${{ steps.check.outputs.valid }}
+      action_name: ${{ steps.check.outputs.action }}
+    steps:
+      - name: Check tag format
+        id: check
+        run: |
+          TAG=${{ github.ref_name }}
+          if [[ $TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            # Repository tag
+            echo "valid=true" >> $GITHUB_OUTPUT
+            echo "action=repo" >> $GITHUB_OUTPUT
+          elif [[ $TAG =~ ^([^/]+)/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            # Action tag
+            ACTION="${BASH_REMATCH[1]}"
+            if [ -d "actions/$ACTION" ]; then
+              echo "valid=true" >> $GITHUB_OUTPUT
+              echo "action=$ACTION" >> $GITHUB_OUTPUT
+            else
+              echo "valid=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "valid=false" >> $GITHUB_OUTPUT
+          fi
+
   release:
+    needs: validate-tag
+    if: needs.validate-tag.outputs.is_valid == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Generate changelog
         id: changelog
         run: |
-          # Generate root changelog
           echo "### Changelog" > CHANGES.md
           echo "" >> CHANGES.md
           git log $(git describe --tags --abbrev=0 HEAD^)..HEAD --pretty=format:"* %s" >> CHANGES.md
           
-          # Update action changelog if tag matches action
-          if [[ "${{ github.ref_name }}" =~ ^([^-]+)-v ]]; then
-            ACTION_NAME="${BASH_REMATCH[1]}"
-            if [ -d "actions/$ACTION_NAME" ]; then
-              cat CHANGES.md >> "actions/$ACTION_NAME/CHANGELOG.md"
+          if [[ "${{ needs.validate-tag.outputs.action_name }}" != "repo" ]]; then
+            ACTION="${{ needs.validate-tag.outputs.action_name }}"
+            if [ -d "actions/$ACTION" ]; then
+              cat CHANGES.md >> "actions/$ACTION/CHANGELOG.md"
             fi
           fi
           

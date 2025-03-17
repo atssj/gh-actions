@@ -28,7 +28,8 @@ fi
 echo -e "${GREEN}Creating tags for changed packages...${NC}"
 echo "$changed_packages" | while IFS='/' read -r dir version; do
   if [ -n "$dir" ] && [ -n "$version" ]; then
-    tag="$(basename $dir)-v$version"
+    action_name=$(basename $dir)
+    tag="${action_name}/v${version}"
     echo -e "${YELLOW}Creating tag ${tag}...${NC}"
     git tag "$tag"
     git push origin "$tag"
