@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+      - '*/v*'
 
 jobs:
   release:
@@ -19,9 +20,19 @@ jobs:
       - name: Generate changelog
         id: changelog
         run: |
+          # Generate root changelog
           echo "### Changelog" > CHANGES.md
           echo "" >> CHANGES.md
           git log $(git describe --tags --abbrev=0 HEAD^)..HEAD --pretty=format:"* %s" >> CHANGES.md
+          
+          # Update action changelog if tag matches action
+          if [[ "${{ github.ref_name }}" =~ ^([^-]+)-v ]]; then
+            ACTION_NAME="${BASH_REMATCH[1]}"
+            if [ -d "actions/$ACTION_NAME" ]; then
+              cat CHANGES.md >> "actions/$ACTION_NAME/CHANGELOG.md"
+            fi
+          fi
+          
           echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
           cat CHANGES.md >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT

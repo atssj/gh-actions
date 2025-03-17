@@ -1,0 +1,30 @@
+name: Test FTP Deploy
+
+on:
+  workflow_call:
+  pull_request:
+    paths:
+      - 'actions/ftp-deploy/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup test FTP server
+        run: |
+          docker run -d \
+            -p 21:21 \
+            -e FTP_USER=test \
+            -e FTP_PASS=test \
+            delfer/alpine-ftp-server
+      
+      - name: Test FTP Deploy
+        uses: ./actions/ftp-deploy
+        with:
+          ftp_server: localhost
+          ftp_username: test
+          ftp_password: test
+          local_dir: ./tests/fixtures
+          remote_dir: /upload

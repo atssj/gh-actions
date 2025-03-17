@@ -4,9 +4,9 @@
   "description": "A collection of Github actions.",
   "scripts": {
     "format": "bunx prettier . --write",
-    "changeset": "changeset",
-    "version": "changeset version",
-    "release": "changeset publish && ./scripts/release.sh",
+    "release:version": "changeset version",
+    "release:publish": "changeset publish",
+    "release": "bash ./scripts/release.sh",
     "commitlint": "bunx --bun commitlint --edit",
     "prepare": "husky"
   },
@@ -14,7 +14,7 @@
     "Github actions"
   ],
   "author": "S Saha",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "packageManager": "bun@1.2.4",
   "engines": {
     "node": ">=20.10.0"
