@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.21
 
 LABEL maintainer="S Saha"
 LABEL org.opencontainers.image.source="https://github.com/atssj/gh-actions"
