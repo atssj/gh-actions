@@ -42,4 +42,4 @@ gh-actions/
 ```
 
 ## License
-This project is released under the [Unlicense](LICENSE).
+This project is released under the [MIT](LICENSE).
