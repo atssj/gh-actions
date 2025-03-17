@@ -1,17 +1,15 @@
 # FTP Deploy Action Changelog
 
-## [Unreleased]
+## [1.0.0] - 2025-03-17
 
 ### Added
 - SSL/TLS support
 - Enhanced logging capabilities
 - File exclusion patterns
-
-### Changed
-- None
-
-### Fixed
-- None
+- Core FTP deployment functionality
+- Support for username/password authentication
+- Directory synchronization with exclude patterns
+- Enhanced error reporting and connection retry logic
 
 ## [0.1.0] - 2024-03-17
 - Initial implementation
