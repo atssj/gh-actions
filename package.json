@@ -6,7 +6,9 @@
     "format": "bunx prettier . --write",
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "changeset publish && ./scripts/release.sh"
+    "release": "changeset publish && ./scripts/release.sh",
+    "commitlint": "bunx --bun commitlint --edit",
+    "prepare": "husky"
   },
   "keywords": [
     "Github actions"
@@ -18,8 +20,11 @@
     "node": ">=20.10.0"
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
-    "@changesets/cli": "^2.27.1"
+    "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.2.5"
   },
   "workspaces": [
     "packages/*",

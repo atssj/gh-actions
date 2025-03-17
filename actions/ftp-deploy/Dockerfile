@@ -1,8 +1,15 @@
-FROM alpine:latest
+FROM alpine:3.19
 
-RUN apk update && apk add lftp
+LABEL maintainer="S Saha"
+LABEL org.opencontainers.image.source="https://github.com/atssj/gh-actions"
+LABEL org.opencontainers.image.description="FTP Deploy Action Container"
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN apk add --no-cache \
+    lftp \
+    ca-certificates \
+    bash
 
-ENTRYPOINT ["/entrypoint.sh"]
+COPY src/main.sh /usr/local/bin/ftp-deploy
+RUN chmod +x /usr/local/bin/ftp-deploy
+
+ENTRYPOINT ["ftp-deploy"]

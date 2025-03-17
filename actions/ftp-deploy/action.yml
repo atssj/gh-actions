@@ -1,39 +1,38 @@
-name: Deploy to FTP Server
-author: S Saha
-description: Github Action to copy a folder to a remote server using FTP
-
+name: 'FTP Deploy Action'
+description: 'Deploy files to FTP server with SSL support and enhanced logging'
 branding:
-  icon: "box"
-  color: "orange"
+  icon: 'upload-cloud'
+  color: 'blue'
 
 inputs:
-  ftp_server_name:
-    description: "Name or IP address of the FTP server"
+  ftp_server:
+    description: 'FTP server hostname'
     required: true
-  ftp_server_username:
-    description: "Username for FTP server"
+  ftp_username:
+    description: 'FTP username'
     required: true
-  ftp_server_password:
-    description: "Password for FTP server"
+  ftp_password:
+    description: 'FTP password'
     required: true
-  ftp_server_port:
-    description: "Port number of the FTP server (default: 21)"
-    required: false
-    default: 21
-  input_dir:
-    description: "Path to the local input directory"
-    required: true
+  local_dir:
+    description: 'Local directory to upload'
+    default: '.'
   remote_dir:
-    description: "Path to the target directory on the FTP server"
-    required: true
+    description: 'Remote directory on FTP server'
+    default: '/'
+  ssl_enabled:
+    description: 'Enable SSL/TLS connection'
+    default: 'true'
+  exclude:
+    description: 'Files to exclude (glob pattern)'
+    default: '.git*,.DS_Store'
+
+outputs:
+  files_uploaded:
+    description: 'Number of files uploaded'
+  transfer_time:
+    description: 'Total transfer time in seconds'
 
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.ftp_server_name }}
-    - ${{ inputs.ftp_server_username }}
-    - ${{ inputs.ftp_server_password }}
-    - ${{ inputs.ftp_server_port }}
-    - ${{ inputs.input_dir }}
-    - ${{ inputs.remote_dir }}
+  using: 'docker'
+  image: 'Dockerfile'

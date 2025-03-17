@@ -5,7 +5,7 @@ Brief description of what this action does.
 ## Usage
 
 ```yaml
-- uses: your-username/gh-actions/actions/action-name@v1
+- uses: atssj/gh-actions/actions/action-name@v1
   with:
     required-input: value
 ```
@@ -26,7 +26,7 @@ Brief description of what this action does.
 
 ```yaml
 steps:
-  - uses: your-username/gh-actions/actions/action-name@v1
+  - uses: atssj/gh-actions/actions/action-name@v1
     with:
       input: value
 ```
