@@ -1,9 +1,12 @@
 {
   "name": "gh-actions",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A collection of Github actions.",
   "scripts": {
-    "format": "bunx prettier . --write"
+    "format": "bunx prettier . --write",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish && ./scripts/release.sh"
   },
   "keywords": [
     "Github actions"
@@ -15,7 +18,8 @@
     "node": ">=20.10.0"
   },
   "devDependencies": {
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "@changesets/cli": "^2.27.1"
   },
   "workspaces": [
     "packages/*",

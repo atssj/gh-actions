@@ -1,0 +1,21 @@
+name: Test Actions
+
+on:
+  pull_request:
+    paths:
+      - 'actions/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Test Action
+        run: |
+          for action in actions/*/; do
+            if [ -f "${action}test/test.yml" ]; then
+              echo "Testing ${action}"
+              act -j test -W "${action}test/test.yml"
+            fi
+          done
