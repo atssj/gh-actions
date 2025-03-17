@@ -1,18 +1,10 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
   "changelog": "@changesets/cli/changelog",
-  "commit": true,
+  "commit": false,
   "fixed": [["@gh-actions/*"]],
-  "linked": [["@gh-actions/**"]],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["**/test/**", "**/tests/**", "**/*.test.*"],
-  "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
-    "updateInternalDependents": "always",
-    "onlyUpdatePeerDependentsWhenOutOfRange": true
-  },
-  "snapshot": {
-    "useCalculatedVersion": true
-  }
+  "ignore": []
 }

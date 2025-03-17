@@ -93,4 +93,3 @@ The following happens automatically:
 - GitHub Actions Documentation: https://docs.github.com/en/actions
 - Internal Tools:
   - Release script: `scripts/release.sh`
-  - Version script: `scripts/version.ps1`
