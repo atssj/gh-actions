@@ -11,7 +11,7 @@
   ],
   "author": "S Saha",
   "license": "MIT",
-  "packageManager": "bun@1.2.4",
+  "packageManager": "bun@1.4.2",
   "engines": {
     "node": ">=20.10.0"
   }
